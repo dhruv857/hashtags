@@ -1,0 +1,23 @@
+version: '2'
+services:
+  ansible:
+    image: dhruv857/ansible
+    build:
+      context: .
+      dockerfile: ansible.docker
+
+  python:
+    image: dhruv857/python
+    build:
+      context: .
+      dockerfile: python.docker
+    depends_on:
+      - ansible
+
+  nginx-py:
+    image: dhruv857/nginx-py
+    build:
+      context: .
+      dockerfile: nginx-django.docker
+    depends_on:
+      - ansible

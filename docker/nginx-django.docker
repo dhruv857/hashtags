@@ -1,0 +1,4 @@
+FROM dhruv857/ansible
+COPY ansible/ /ansible/
+RUN ansible-playbook /ansible/nginx-django.yml -i '127.0.0.1,' -c local
+CMD nginx -g 'daemon off'

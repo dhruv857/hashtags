@@ -1,0 +1,43 @@
+version: '2'
+services:
+  gunnicorn:
+    image: dhruv857/python
+    volumes:
+      - .:/django/
+      - virtualenv:/venv/
+      - data:/data/
+    command: /django/build.bash
+    networks:
+       - python_net
+
+  nginx:
+    image: dhruv857/nginx-py
+    volumes:
+      - .:/django/
+      - virtualenv:/venv/
+      - data:/data/
+    networks:
+       - python_net
+    ports:
+      - "127.0.0.1:80:80"
+    command: nginx -g 'daemon off;'
+
+  admin:
+    image: dhruv857/python
+    volumes:
+      - .:/django/
+      - virtualenv:/venv/
+      - data:/data/
+    networks:
+       - python_net
+    command: /bin/bash
+    tty: yes
+    stdin_open: yes
+
+networks:
+  python_net:
+    driver: bridge
+
+volumes:
+  virtualenv:
+    external: false

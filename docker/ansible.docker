@@ -1,0 +1,16 @@
+FROM debian:jessie
+MAINTAINER Dhruv Gandhi <dhruv.scorpio@gmail.com
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    python \
+    python-setuptools \
+    python-dev \
+    libssl-dev \
+    build-essential
+RUN easy_install pip
+RUN apt-get remove -y python-setuptools
+RUN pip install setuptools
+RUN pip install 'ansible>=2.1.2,<3.0.0'
+RUN apt-get remove -y python-dev libssl-dev build-essential && apt-get autoremove -y
+RUN apt-get install net-tools
+RUN apt-get install less

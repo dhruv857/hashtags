@@ -1,0 +1,26 @@
+---
+- name: Update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Remove default config
+  file:
+    state: absent
+    path: /etc/nginx/sites-enabled/default
+
+- name: Install django config
+  template:
+    src: django_nginx.conf
+    dest: /etc/nginx/sites-available/django_nginx.conf
+
+- name: Enable django config
+  file:
+    state: link
+    src: /etc/nginx/sites-available/django_nginx.conf
+    dest: /etc/nginx/sites-enabled/django_nginx.conf
