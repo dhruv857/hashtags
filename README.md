@@ -15,3 +15,12 @@ Docker images to run and develop locally (dhruv857 on docker hub)
 > I wans't able to finish the test due to lack of time.
 
 > My idea initially was to develop development environment, build out api functionality(Use Celery for broadcasting and reading tasks when api receives a request), build models->DB, write tests, make frontend aroudn the api.
+
+# Run instruction
+
+- have docker installed.
+
+```sh
+cd app
+docker-compose up
+```
